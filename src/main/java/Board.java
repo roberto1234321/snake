@@ -16,6 +16,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
+import javax.sound.sampled.*;
+
 public class Board extends JPanel implements ActionListener {
 
     private final int B_WIDTH = 300;
@@ -53,6 +56,43 @@ public class Board extends JPanel implements ActionListener {
         loadImages();
         initGame();
     }
+
+private void playSound(String name) {
+        
+    try{ 
+            
+        AudioInputStream ais = AudioSystem.getAudioInputStream
+(getClass().getClassLoader().getResource("sounds/" + name));
+            
+        Clip test = AudioSystem.getClip();  
+
+            
+        test.open(ais);
+            
+        test.start();
+
+      
+      
+        while (!test.isRunning())
+                
+            Thread.sleep(10);
+            
+        while (test.isRunning())
+                
+            Thread.sleep(10);
+
+   
+         
+        test.close();
+        
+    }
+    catch(Exception ex){
+            
+        ex.printStackTrace();
+        
+    } 
+    
+}
 
     private void loadImages() {
 
@@ -118,6 +158,10 @@ public class Board extends JPanel implements ActionListener {
 
         g.setColor(Color.white);
         g.setFont(small);
+
+        playSound("gameover.wav");
+
+
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
     }
 
