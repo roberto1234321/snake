@@ -43,6 +43,10 @@ public class Board extends JPanel implements ActionListener {
 
     private Timer timer;
     private Image ball;
+    asd
+    as
+    drawStringd
+    asd
     private Image apple;
     private Image head;
 
